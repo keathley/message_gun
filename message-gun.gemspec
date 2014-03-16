@@ -8,8 +8,12 @@ Gem::Specification.new do |spec|
   spec.version       = Message::Gun::VERSION
   spec.authors       = ["Chris Keathley"]
   spec.email         = ["spyc3r@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{Send messages through twilio like a boss}
+  spec.description   = %q{
+                           Message-Gun is used to test systems that receive
+                           text messages by sending lots of messages through
+                           the twilio API.
+                         }
   spec.homepage      = ""
   spec.license       = "MIT"
 
