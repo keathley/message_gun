@@ -1,4 +1,6 @@
 require 'yaml'
+require 'twilio-ruby'
+require 'faker'
 
 module MessageGun
   class Gun
@@ -11,6 +13,10 @@ module MessageGun
 
     def run
       @config = YAML::load(File.open(@input_file))
+      @client = Twilio::REST::Client.new(
+        @config['twilio_sid'],
+        @config['twilio_auth_token']
+      )
 
       child_pids = @config['senders'].each_with_object([]) do |sender, pids|
         pids << spawn_child(sender)
@@ -43,8 +49,14 @@ module MessageGun
     def spawn_child(sender)
       fork do
         loop do
-          puts "Hello World: #{Process.pid}"
-          sleep(rand(1..6))
+          text = Faker::Lorem.sentence
+          puts "Process #{Process.pid} sending: #{text}"
+          @client.account.messages.create(
+            :from => sender,
+            :to => @config['receiver'],
+            :body => text
+          )
+          sleep(rand(10..60))
         end
       end
     end
