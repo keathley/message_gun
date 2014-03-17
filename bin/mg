@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+require 'message_gun'
+require 'thor'
+
+class MG < Thor
+
+  desc "fire", "Start sending messages"
+  option :file,
+          :aliases => "-f",
+          :desc => "specify a configuration file",
+          :default => "config.yml"
+  def fire
+    mg = MessageGun::Gun.new(input_file: options[:file])
+    mg.run
+  end
+end
+
+MG.start(ARGV)
