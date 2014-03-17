@@ -1,0 +1,6 @@
+senders:
+  - 2134538576
+  - 1234567890
+receiver: 0987654321
+twilio_sid: YOUR_SID
+twilio_auth_token: YOUR_SECRET_TOKEN

@@ -56,7 +56,9 @@ module MessageGun
             :to => @config['receiver'],
             :body => text
           )
-          sleep(rand(10..60))
+          sleep_number = rand(2..10)
+          puts "Process #{Process.pid} is sleeping for #{sleep_number}"
+          sleep(sleep_number)
         end
       end
     end
